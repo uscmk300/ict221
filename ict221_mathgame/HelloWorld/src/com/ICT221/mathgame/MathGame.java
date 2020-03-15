@@ -12,6 +12,8 @@ public class MathGame {
     int score = 0;
     boolean repeadThePreviousQuestion = false;
     int reattempts = 3;
+    String jokeAnswer;
+    char attJoke;
 
     Random rand = new Random();
     Scanner in = new Scanner(System.in);
@@ -49,16 +51,21 @@ public class MathGame {
     }//sumGenerator Method
 
     public void jokeGenerator(){
+        repeadThePreviousQuestion = false;
         int randomJoke = rand.nextInt(3);
-        if(randomJoke == 1){
+        if(randomJoke == 0){
             System.out.println("How are you doing?");
-        }else if(randomJoke == 2){
+
+        }else if(randomJoke == 1){
             System.out.println("What would coloure is the Napeleon white whorse?");
+
         }else {
             System.out.println("What is my name?");
+
         }
 
-        att = in.nextInt();
+        attJoke = in.next().charAt(0);
+        repeadThePreviousQuestion = false;
         System.out.println("Good one!");
 
     }//
@@ -72,7 +79,7 @@ public class MathGame {
             repeadThePreviousQuestion = false;
         }else{
 
-            score = score - 1;
+            /* score = score - 1; */
             System.out.println("Incorrect");
             System.out.println("Score is currently: " + score + "/5");
             repeadThePreviousQuestion = true;
@@ -82,8 +89,9 @@ public class MathGame {
 
 
 class Quiz {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
         Random rand = new Random();
 
         MathGame machine1 = new MathGame();
@@ -92,12 +100,16 @@ class Quiz {
 
         int questionType = rand.nextInt(5);
         machine1.randomNumbersCreator();
+        int i;
+do{
 
-        for (int i = 5; i > 0; i--) {
+    machine1.reattempts = 3;
+
+        for (i = 5; i > 0; i--) {
 
             //generating a random number and then in switch case deciding what question to ask based on that num
             switch(questionType){
-                case 1:
+                case 0:
 
                     machine1.additionGenerator();
                     machine1.answerGetter_score();
@@ -113,7 +125,7 @@ class Quiz {
 
                     break;
 
-                case 2:
+                case 1:
 
                     machine1.subtractionGenerator();
                     machine1.answerGetter_score();
@@ -129,7 +141,7 @@ class Quiz {
 
                     break;
 
-                case 3:
+                case 2:
 
                     machine1.multiplicationGenerator();
                     machine1.answerGetter_score();
@@ -145,7 +157,7 @@ class Quiz {
 
                     break;
 
-                case 4:
+                case 3:
 
                     machine1.divisionGenerator();
                     machine1.answerGetter_score();
@@ -162,14 +174,17 @@ class Quiz {
                     break;
 
 
-                case 5:
+                case 4:
 
                     machine1.jokeGenerator();
-                    i++;
+                    questionType = rand.nextInt(5);
                     break;
             }
         }
+    System.out.println("Would you like to go for a another round(y/n)?");
+} while(Character.compare(in.next().charAt(0), 'y') == 0);
 
         System.out.println("Thanks for taking the test.");
+        System.out.println("Your final Score for this game is: " + machine1.score + "/5");
     }
 }
