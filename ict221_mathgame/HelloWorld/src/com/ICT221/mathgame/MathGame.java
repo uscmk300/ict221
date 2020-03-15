@@ -13,12 +13,36 @@ public class MathGame {
     Random rand = new Random();
     Scanner in = new Scanner(System.in);
 
-    public void sumGenerator(){
-        num1 = rand.nextInt(10);
-        num2 = rand.nextInt(10);
+    public void additionGenerator(){
+        num1 = rand.nextInt(50);
+        num2 = rand.nextInt(50);
         ans = num1 + num2;
 
         System.out.println(num1 +  " + " + num2 );
+    }//sumGenerator Method
+
+    public void subtractionGenerator(){
+        num1 = rand.nextInt(50);
+        num2 = rand.nextInt(50);
+        ans = num1 - num2;
+
+        System.out.println(num1 +  " - " + num2 );
+    }//sumGenerator Method
+
+    public void multiplicationGenerator(){
+        num1 = rand.nextInt(10);
+        num2 = rand.nextInt(10);
+        ans = num1 * num2;
+
+        System.out.println(num1 +  " * " + num2 );
+    }//sumGenerator Method
+
+    public void divisionGenerator(){
+        num1 = rand.nextInt(50);
+        num2 = rand.nextInt(50);
+        ans = num1 / num2;
+
+        System.out.println(num1 +  " / " + num2 );
     }//sumGenerator Method
 
     public void answerGetter_score(){
@@ -38,13 +62,47 @@ public class MathGame {
 
 class Quiz {
     public static void main(String[] args) {
+
+        Random rand = new Random();
+
         MathGame machine1 = new MathGame();
         System.out.println("***Welcome to addition Math test***");
 
         for (int i = 5; i > 0; i--) {
-            machine1.sumGenerator();
-            machine1.answerGetter_score();
+
+            //generating a random number and then in switch case deciding what question to ask based on that num
+            int questionType = rand.nextInt(4);
+
+            switch(questionType){
+                case 1:
+
+                    machine1.additionGenerator();
+                    machine1.answerGetter_score();
+                    break;
+
+                case 2:
+
+                    machine1.subtractionGenerator();
+                    machine1.answerGetter_score();
+                    break;
+
+                case 3:
+
+                    machine1.multiplicationGenerator();
+                    machine1.answerGetter_score();
+                    break;
+
+                case 4:
+
+                    machine1.divisionGenerator();
+                    machine1.answerGetter_score();
+                    break;
+            }
         }
+
+
+
+
         System.out.println("Thanks for taking the test.");
     }//main method
 }
